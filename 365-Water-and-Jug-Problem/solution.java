@@ -1,8 +1,8 @@
 public class Solution {
     public static int gcd(int x, int y) {
         while (true) {
-            if (x == y || y == 0) break;
-            if (x > y) {
+            if (y == 0) break;
+            if (x >= y) {
                 x = x - y;
             } else {
                 x = x ^ y;
