@@ -4,19 +4,20 @@ public class Solution {
         
         Set<String> visited = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
+        
+        int level = 1;
+        if (beginWord.equals(endWord)) return level;
         queue.offer(beginWord);
         visited.add(beginWord);
         
-        int level = 1;
         while (!queue.isEmpty()) {
             int n = queue.size();
             for (int i = 0; i < n; i++) {
                 String word = queue.poll();
-                if (word.equals(endWord)) return level;
                 List<String> nextWords = getWordList(word, wordList);
                 for (String next : nextWords) {
                     if (visited.contains(next)) continue;
-                    // if (next.equals(endWord)) return level;
+                    if (next.equals(endWord)) return level + 1;
                     visited.add(next);
                     queue.offer(next);
                 }
