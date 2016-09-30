@@ -12,49 +12,37 @@ public class Solution {
         if (l2 == null) return l1;
         
         ListNode header = new ListNode(-1);
-        ListNode tail = header;
-        ListNode p1 = l1, p2 = l2;
+        ListNode p1 = l1, p2 = l2, tail = header;
         int carrier = 0;
         while (p1 != null && p2 != null) {
-            int digit = (p1.val + p2.val + carrier) % 10;
-            carrier = (p1.val + p2.val + carrier) / 10;
+            int sum = (p1.val + p2.val + carrier);
+            int digit = sum % 10;
+            carrier = sum / 10;
             tail.next = new ListNode(digit);
             tail = tail.next;
             p1 = p1.next;
             p2 = p2.next;
         }
-        
         while (p1 != null) {
-            if (carrier == 0) {
-                tail.next = p1;
-                break;
-            } else {
-                int digit = (p1.val + carrier) % 10;
-                carrier = (p1.val + carrier) / 10;
-                tail.next = new ListNode(digit);
-                tail = tail.next;
-                p1 = p1.next;
-            }
+            int sum = (p1.val + carrier);
+            int digit = sum % 10;
+            carrier = sum / 10;
+            tail.next = new ListNode(digit);
+            tail = tail.next;
+            p1 = p1.next;
         }
-        
         while (p2 != null) {
-            if (carrier == 0) {
-                tail.next = p2;
-                break;
-            } else {
-                int digit = (p2.val + carrier) % 10;
-                carrier = (p2.val + carrier) / 10;
-                tail.next = new ListNode(digit);
-                tail = tail.next;
-                p2 = p2.next;
-            }
+            int sum = (p2.val + carrier);
+            int digit = sum % 10;
+            carrier = sum / 10;
+            tail.next = new ListNode(digit);
+            tail = tail.next;
+            p2 = p2.next;
         }
-        
         if (carrier > 0) {
             tail.next = new ListNode(carrier);
             tail = tail.next;
         }
-        
         return header.next;
     }
 }
