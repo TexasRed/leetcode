@@ -27,6 +27,7 @@
  * }
  */
 public class Solution {
+    // LeetCode does not support static variable!!!
     private static class Pair {
         int depth;
         int complete;
