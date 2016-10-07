@@ -16,8 +16,31 @@
  * }
  */
 public class Solution {
+    private static class Pair {
+        List<NestedInteger> li;
+        Integer level;
+        public Pair(List<NestedInteger> li, Integer level) {
+            this.li = li;
+            this.level = level;
+        }
+    }
     public int depthSum(List<NestedInteger> nestedList) {
-      return weightedDepthSum(nestedList, 1);
+      Stack<Pair> stack = new Stack<>();
+      int sum = 0;
+      stack.push(new Pair(nestedList, 1));
+      while (!stack.isEmpty()) {
+          Pair curr = stack.pop();
+          int level = curr.level;
+          for (NestedInteger ni : curr.li) {
+              if (ni.isInteger()) {
+                  sum += ni.getInteger() * level;
+              } else {
+                  stack.push(new Pair(ni.getList(), level + 1));
+              }
+          }
+      }
+      return sum;
+    //   return weightedDepthSum(nestedList, 1);
     }
     
     private int weightedDepthSum(List<NestedInteger> nestedList, int level) {
